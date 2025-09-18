@@ -40,7 +40,7 @@ public class JournalEntryService {
         user.getJournalentry().add(saved);
 
         // 5. Save the user back with updated journal entries
-        userService.saveEntry(user);
+        userService.saveUser(user);
 
         return saved;
     }

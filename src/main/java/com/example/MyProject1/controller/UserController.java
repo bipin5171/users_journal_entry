@@ -29,21 +29,6 @@ public class UserController {
         return userService.getAllUser();
     }
 
-
-    // POST: localhost:8080/journal
-    @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-
-        try {
-            userService.saveEntry(user);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-    }
-
-
     @GetMapping("/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable String userName) {
         User responseUser = userService.findByUserName(userName);
@@ -73,7 +58,7 @@ public class UserController {
         if (userInDb != null) {
             userInDb.setUserName(user.getUserName());
             userInDb.setPassword(user.getPassword());
-            userService.saveEntry(userInDb);
+            userService.saveUser(userInDb);
             return new ResponseEntity<>(userInDb, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
