@@ -21,14 +21,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-    // GET: localhost:8080/journal
-    @GetMapping
-    public List<User> getAllUsers() {
-
-        return userService.getAllUser();
-    }
-
     @GetMapping("/{userName}")
     public ResponseEntity<User> getUserByUserName(@PathVariable String userName) {
         User responseUser = userService.findByUserName(userName);

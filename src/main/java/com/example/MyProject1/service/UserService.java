@@ -38,6 +38,23 @@ public class UserService {
         userRepository.save(user);
     }
 
+
+    public void saveAdmin(User user) {
+        // 1. Encode password if not already encoded
+        if (user.getPassword() != null && !user.getPassword().startsWith("$2a$")) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
+        // 2. Force ADMIN role
+        user.setRoles(Collections.singletonList("ADMIN"));
+
+        // 3. Save to DB
+        userRepository.save(user);
+    }
+
+
+
+
     public List<User> getAllUser() {
         return userRepository.findAll();
     }
